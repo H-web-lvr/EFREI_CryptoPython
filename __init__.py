@@ -12,7 +12,7 @@ def hello_world():
     return render_template('hello.html')
   
 @app.route('/jeu_des_solutions')
-def Halima():
+def jeu_des_solutions():
     return render_template('jeu_des_solutions.html')
 
 key = Fernet.generate_key()
