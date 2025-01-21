@@ -11,9 +11,9 @@ app = Flask(__name__)
 def hello_world():
     return render_template('hello.html')
   
-@app.route('/jeu_des_solutions')
-def jeu_des_solutions():
-    return render_template('jeu_des_solutions.html')
+@app.route('/bibliotheque_images')
+def bibliotheque_images():
+    return render_template('bibliotheque_images')
 
 key = Fernet.generate_key()
 f = Fernet(key)
