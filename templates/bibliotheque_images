@@ -22,13 +22,12 @@ function image1(){
 
 <h2>Image 2</h2>
 <img id=coul src="{{ url_for('static', filename='images/image_coul.jpg') }}" alt="Logo">
-<p>Image 1<input onclick="image1()" type="checkbox" id="1"></p>
+<p>Image 2<input onclick="image2()" type="checkbox" id="2"></p>
 <hr/>
 
 <h2>Image 3</h2>
 <img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Logo">
-<button onclick="afficherImage('image3')">Afficher Image 3</button>
-<button onclick="cacherImage('image3')">Cacher Image 3</button>
+<p>Image 1<input onclick="image1()" type="checkbox" id="1"></p>
 
 </body>
 </html>
