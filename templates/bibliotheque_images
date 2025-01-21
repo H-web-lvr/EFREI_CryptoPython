@@ -1,33 +1,39 @@
+<!DOCTYPE html>
 <html>
 <head>
-<script>
-
-function image1(){
-	if(document.getElementById('image1').checked){
-	document.getElementById"('coul')".style.display="Block";
-	}
-	else document.getElementById('coul').style.display="None";
-} 
-
-</script>
+    <title>Mes outils pour images</title>
+    <script>
+        // Fonction pour afficher/masquer une image en fonction de l'ID
+        function toggleImage(imageId, checkboxId) {
+            const checkbox = document.getElementById(checkboxId);
+            const image = document.getElementById(imageId);
+            
+            if (checkbox.checked) {
+                image.style.display = "block";
+            } else {
+                image.style.display = "none";
+            }
+        }
+    </script>
 </head>
 <body>
-<h1>Mes outils pour images</h1>
-<hr/>
+    <h1>Mes outils pour images</h1>
+    <hr/>
 
-<h2>Image 1</h2>
-<img src="{{ url_for('static', filename='images/elephant.jpg') }}" alt="Logo">
-<p>Image 1<input onclick="image1()" type="checkbox" id="image1"></p>
-<hr/>
+    <h2>Image 1</h2>
+    <img id="image1" src="{{ url_for('static', filename='images/elephant.jpg') }}" alt="Logo" style="display:none;">
+    <p>Image 1 <input onclick="toggleImage('image1', 'checkbox1')" type="checkbox" id="checkbox1"></p>
+    <hr/>
 
-<h2>Image 2</h2>
-<img id="coul" src="{{ url_for('static', filename='images/image_"coul".jpg') }}" alt="Logo">
-<p>Image 2<input onclick="image2()" type="checkbox" id="2"></p>
-<hr/>
+    <h2>Image 2</h2>
+    <img id="image2" src="{{ url_for('static', filename='images/image_coul.jpg') }}" alt="Logo" style="display:none;">
+    <p>Image 2 <input onclick="toggleImage('image2', 'checkbox2')" type="checkbox" id="checkbox2"></p>
+    <hr/>
 
-<h2>Image 3</h2>
-<img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Logo">
-<p>Image 3<input onclick="image3()" type="checkbox" id="3"></p>
-
+    <h2>Image 3</h2>
+    <img id="image3" src="{{ url_for('static', filename='images/image.jpg') }}" alt="Logo" style="display:none;">
+    <p>Image 3 <input onclick="toggleImage('image3', 'checkbox3')" type="checkbox" id="checkbox3"></p>
+    <hr/>
 </body>
 </html>
+
