@@ -10,6 +10,10 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     return render_template('hello.html')
+  
+@app.route('/jeu_des_solutions')
+def Halima():
+    return render_template('halima.html')
 
 key = Fernet.generate_key()
 f = Fernet(key)
