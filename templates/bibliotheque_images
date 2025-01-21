@@ -1,38 +1,35 @@
 <html>
 <head>
 <script>
-function affichage(){
-alert("Tout es OK !");
-}
-function cacher(){
-document.getElementById('DuTexte').style.display="None";
-}
-function presenter(){
-document.getElementById('DuTexte').style.display="Block";
+function afficherImage(id) {
+    document.getElementById(id).style.display = "block";
 }
 
-function controler(){
-if(document.getElementById('Control').checked){
-alert("Bouton option coché");
+function cacherImage(id) {
+    document.getElementById(id).style.display = "none";
 }
-else{alert("Bouton option NON coché");}
-}
-
 </script>
 </head>
 <body>
-<h1>Mes outils</h1>
+<h1>Mes outils pour images</h1>
 <hr/>
-<h2>Boite de dialogue</h2>
-<button onclick="affichage()">Afficher</button>
-<hr/>
-<p id="DuTexte">Ma phrase de texte</p>
-<button onclick="presenter()">Presenter</button>
-<button onclick="cacher()">Cacher</button>
-<hr/>
-<p>Option<input type="checkbox" id="Control"></p>
-<button onclick="controler()">Check</button>
 
+<h2>Image 1</h2>
+<img src="{{ url_for('static', filename='images/elephant.jpg') }}" alt="Logo">
+<button onclick="afficherImage('image1')">Afficher Image 1</button> 
+<button onclick="cacherImage('image1')">Cacher Image 1</button>
+<hr/>
+
+<h2>Image 2</h2>
+<img src="{{ url_for('static', filename='images/image_coul.jpg') }}" alt="Logo">
+<button onclick="afficherImage('image2')">Afficher Image 2</button>
+<button onclick="cacherImage('image2')">Cacher Image 2</button>
+<hr/>
+
+<h2>Image 3</h2>
+<img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Logo">
+<button onclick="afficherImage('image3')">Afficher Image 3</button>
+<button onclick="cacherImage('image3')">Cacher Image 3</button>
 
 </body>
 </html>
