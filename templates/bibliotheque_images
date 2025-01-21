@@ -21,7 +21,7 @@ function image1(){
 <hr/>
 
 <h2>Image 2</h2>
-<img id=coul src="{{ url_for('static', filename='images/image_"coul".jpg') }}" alt="Logo">
+<img id="coul" src="{{ url_for('static', filename='images/image_"coul".jpg') }}" alt="Logo">
 <p>Image 2<input onclick="image2()" type="checkbox" id="2"></p>
 <hr/>
 
