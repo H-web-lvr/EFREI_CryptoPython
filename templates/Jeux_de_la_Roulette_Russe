@@ -1,28 +1,87 @@
-</html>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-<script>
-function lancer(){
-          alert("le barillet tourne");
-}
-</script>
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roulette Russe</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        canvas { background: #f0f0f0; cursor: pointer; }
+        button { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
+    </style>
 </head>
 <body>
-<h1>Roulette Russe</h1>
+    <h1>Roulette Russe</h1>
+    <canvas id="barillet" width="300" height="300"></canvas>
+    <br>
+    <button onclick="jouer()">Jouer</button>
+    <p id="resultat"></p>
 
-<svg width=200 height=200 style="background-color:antiquewhite">
-<circle cx="100" cy="100" r="95" stroke="black" stroke-width="3" fill="none" />
-<circle id="Br1" cx="100" cy="40" r="25" stroke="black" stroke-width="3" fill="gray" />
-<circle id="Br2" cx="150" cy="70" r="25" stroke="black" stroke-width="3" fill="gray" />
-<circle id="Br3" cx="50" cy="70" r="25" stroke="black" stroke-width="3" fill="gray" />
-<circle id="Br4" cx="50" cy="130" r="25" stroke="black" stroke-width="3" fill="gray" />
-<circle id="Br5" cx="150" cy="130" r="25" stroke="black" stroke-width="3" fill="gray" />
-<circle id="Br6" cx="100" cy="160" r="25" stroke="black" stroke-width="3" fill="gray" />
-<circle cx="100" cy="100" r="10" stroke="black" stroke-width="3" fill="black" />
-</svg>
-
-<button onclick="lancer()">Jouer</button>
-
+    <script>
+        const canvas = document.getElementById("barillet");
+        const ctx = canvas.getContext("2d");
+        const centreX = canvas.width / 2;
+        const centreY = canvas.height / 2;
+        const rayon = 100;
+        const chambres = 6;
+        let balles = [];
+        let resultat = document.getElementById("resultat");
+        
+        function dessinerBarillet() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.arc(centreX, centreY, rayon, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            for (let i = 0; i < chambres; i++) {
+                let angle = (i * Math.PI * 2) / chambres;
+                let x = centreX + Math.cos(angle) * (rayon - 30);
+                let y = centreY + Math.sin(angle) * (rayon - 30);
+                ctx.beginPath();
+                ctx.arc(x, y, 20, 0, Math.PI * 2);
+                ctx.fillStyle = balles.includes(i) ? "red" : "gray";
+                ctx.fill();
+                ctx.stroke();
+            }
+        }
+        
+        canvas.addEventListener("click", function(event) {
+            let rect = canvas.getBoundingClientRect();
+            let xClick = event.clientX - rect.left;
+            let yClick = event.clientY - rect.top;
+            
+            for (let i = 0; i < chambres; i++) {
+                let angle = (i * Math.PI * 2) / chambres;
+                let x = centreX + Math.cos(angle) * (rayon - 30);
+                let y = centreY + Math.sin(angle) * (rayon - 30);
+                let distance = Math.sqrt((xClick - x) ** 2 + (yClick - y) ** 2);
+                if (distance < 20) {
+                    if (balles.includes(i)) {
+                        balles = balles.filter(b => b !== i);
+                    } else if (balles.length < 3) {
+                        balles.push(i);
+                    }
+                    dessinerBarillet();
+                    return;
+                }
+            }
+        });
+        
+        function jouer() {
+            if (balles.length === 0) {
+                resultat.innerText = "Ajoutez au moins une balle !";
+                return;
+            }
+            let balleBleue = Math.floor(Math.random() * chambres);
+            if (balles.includes(balleBleue)) {
+                resultat.innerText = "PERDU ! La balle bleue est tombée sur une chambre rouge.";
+            } else {
+                let gains = { 1: 10000, 2: 100000, 3: 1000000 };
+                resultat.innerText = `GAGNÉ ! Vous remportez ${gains[balles.length]} €`;
+            }
+        }
+        
+        dessinerBarillet();
+    </script>
 </body>
 </html>
